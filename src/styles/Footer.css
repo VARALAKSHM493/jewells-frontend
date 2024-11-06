@@ -1,0 +1,79 @@
+/* src/styles/Footer.css */
+
+footer {
+    background-color: lightgray;
+    padding: 20px;
+    text-align: left;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+}
+
+.footer-sec {
+    display: flex;
+    flex-wrap: nowrap; /* Keep all sections in a single row */
+    justify-content: space-between; /* Space between sections */
+    flex: 1; /* Allow this section to take up available space */
+}
+
+.footer-section {
+    flex: 1; /* Allows sections to grow equally */
+    min-width: 150px; /* Minimum width to maintain layout */
+}
+
+.footer-section h6 {
+    font-size: 1em; /* Decreased font size */
+    margin: 0; /* Remove margin */
+}
+
+.footer-section ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.footer-section ul li {
+    margin: 0; /* Remove margin */
+    font-size: 0.9em; /* Decreased font size for list items */
+    list-style-type: none;
+}
+
+.footer-promo {
+    padding: 20px; /* Padding for the promo section */
+    flex: 0 0 400px; /* Set width for promo section */
+    margin-left: 30px; /* Space from footer sections */
+    font-size: 0.9em; /* Adjusted font size for promo text */
+    max-height: 120px; /* Set max height to accommodate six lines */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.footer-image {
+    flex: 0 0 200px; /* Adjust width for image */
+    display: flex; /* Flex display to center image */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.footer-image img {
+    max-width: 100%; /* Make sure image scales responsively */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.footer-qr-code {
+    text-align: center; /* Center the QR code */
+    margin-top: 0; /* Remove space above the QR code */
+}
+
+.footer-qr-code img {
+    max-width: 150px; /* Set a max width for the QR code */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.8em; /* Decreased font size for footer bottom */
+    margin-top: 20px;
+}

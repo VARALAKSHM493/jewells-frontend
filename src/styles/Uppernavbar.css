@@ -1,0 +1,40 @@
+.upper-navbar {
+    height: 30px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #6d190a; /* Brown color */
+    padding: 0 15px; /* Optional: add padding */
+    overflow: hidden; /* Prevents overflow */
+}
+
+.upper-navbar-text {
+    margin-right: 20px; /* Space between the texts */
+    font-size: 12px; /* Adjust font size as needed */
+    color: #fff; /* Change text color to white for better contrast */
+}
+.upper-navbar {
+    height: 30px; /* Set the height for the navbar */
+    overflow: hidden; /* Hide overflowing text */
+    position: relative; /* Positioning context for absolute children */
+}
+
+.upper-navbar-content {
+    display: inline-block; /* Allows for smooth animation */
+    white-space: nowrap; /* Prevent text from wrapping */
+    animation: scrollText 5s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(-100%); /* Start off-screen on the left */
+    }
+    100% {
+        transform: translateX(100%); /* Move off-screen to the right */
+    }
+}
+
+.upper-navbar-text {
+    font-size: 15px; /* Adjust font size as needed */
+    text-align: center; /* Center the text */
+}

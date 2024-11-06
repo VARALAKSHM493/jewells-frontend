@@ -1,0 +1,18 @@
+.lower-navbar {
+    padding: 10px; /* Adjust padding as needed */
+    background-color: #f8f9fa; /* Light background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0); 
+    height: 3rem;
+    border:1px solid goldenrod ;
+}
+
+.mr-auto{
+    padding-right: 20px;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the contact info to the right */
+    font-size: 14px; /* Adjust font size as needed */
+}

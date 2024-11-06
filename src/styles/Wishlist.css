@@ -1,0 +1,53 @@
+/* src/components/Wishlist.css */
+.wishlist-container {
+    padding: 20px;
+  }
+  
+  .wishlist-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .product-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .product-info img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .add-product {
+    margin-top: 20px;
+  }
+  
+  .add-product button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-product button:hover {
+    background-color: #388e3c;
+  }
+  

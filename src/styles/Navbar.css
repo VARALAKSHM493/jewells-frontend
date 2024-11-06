@@ -1,0 +1,10 @@
+/* Custom Navbar Dropdown width */
+.custom-dropdown .dropdown-menu {
+    min-width: 300px;  /* Set the minimum width you want */
+    width: 400px;      /* Set a specific width (adjust as needed) */
+    padding: 20px;     /* Add some padding if needed */
+}
+
+.custom-dropdown .dropdown-item-hover:hover {
+    background-color: #f1f1f1; /* Custom hover effect */
+}
