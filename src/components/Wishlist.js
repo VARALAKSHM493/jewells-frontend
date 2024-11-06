@@ -1,90 +1,97 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Alert, Button } from 'react-bootstrap';
 import axios from 'axios';
-import '../styles/Wishlist.css'
+
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  // Fetch the wishlist items on component mount
+  // Fetch wishlist items on mount
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get('/wishlist/allwishlistitems');
-        setWishlist(response.data.products); // Assuming `products` is an array in the response
-        setLoading(false);
-      } catch (err) {
-        setError('Error fetching wishlist data');
+        const response = await axios.get('http://localhost:5000/wishlist/allwishlistitems');
+        // Ensure wishlist data is properly structured
+        setWishlist(response.data.wishlist ? response.data.wishlist.products : []);
+      } catch (error) {
+        console.error('Error fetching wishlist:', error);
+        setErrorMessage('Failed to fetch wishlist.');
+      } finally {
         setLoading(false);
       }
     };
-
     fetchWishlist();
   }, []);
 
-  // Remove an item from the wishlist
-  const handleRemoveItem = async (productId) => {
+  // Remove item from wishlist
+  const removeFromWishlist = async (productId) => {
     try {
-      await axios.delete(`/wishlist/removeFromWishlist/${productId}`);
-      setWishlist((prevState) =>
-        prevState.filter((product) => product.productId !== productId)
-      );
-    } catch (err) {
-      setError('Error removing product from wishlist');
+      // Send DELETE request to backend
+      const response = await axios.delete(`http://localhost:5000/wishlist/removefromwishlist/${productId}`);
+
+      // Check if the delete was successful (status 200)
+      if (response.status === 200) {
+        // Update frontend state by removing the product
+        setWishlist(wishlist.filter(product => product.productId !== productId));
+      }
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+      setErrorMessage('Failed to remove product from wishlist.');
     }
   };
 
-  // Add product to wishlist
-  const handleAddToWishlist = async (product) => {
+  // Add product to cart
+  const addToCart = async (product) => {
     try {
-      await axios.post('/wishlist/addtowishlist', product);
-      setWishlist((prevState) => [...prevState, product]);
-    } catch (err) {
-      setError('Error adding product to wishlist');
+      await axios.post('http://localhost:5000/cart/addtocart', {
+        products: [{ productId: product._id, quantity: 1 }],
+      });
+      removeFromWishlist(product._id); // Remove from wishlist after adding to cart
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setErrorMessage('Failed to add product to cart.');
     }
   };
 
-  if (loading) return <p>Loading wishlist...</p>;
-  if (error) return <p>{error}</p>;
+  // Show loading state while data is being fetched
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className="wishlist-container">
+    <Container>
       <h2>Your Wishlist</h2>
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       {wishlist.length === 0 ? (
         <p>Your wishlist is empty.</p>
       ) : (
-        <ul>
+        <Row>
           {wishlist.map((product) => (
-            <li key={product.productId} className="wishlist-item">
-              <div className="product-info">
-                <img src={product.image} alt={product.name} />
-                <div>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p><strong>Price: ${product.price}</strong></p>
-                </div>
-              </div>
-              <button onClick={() => handleRemoveItem(product.productId)}>
+            <Col key={product.productId} md={3} className="text-center mb-4">
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{ width: '100%', height: 'auto' }}
+              />
+              <h5>{product.name}</h5>
+              <p>Price: ₹{product.price.toFixed(2)}</p>
+              <p>{product.description}</p>
+              {/* <Button variant="success" onClick={() => addToCart(product)}>
+                Add to Cart
+              </Button> */}
+              <Button
+                variant="danger"
+                onClick={() => removeFromWishlist(product.productId)} // Corrected productId usage
+                className="ms-2"
+              >
                 Remove from Wishlist
-              </button>
-            </li>
+              </Button>
+            </Col>
           ))}
-        </ul>
+        </Row>
       )}
-
-      {/* Add Product Button (This could be replaced with a dynamic product object) */}
-      <div className="add-product">
-        <button onClick={() => handleAddToWishlist({
-          productId: '12345',
-          name: 'Sample Product',
-          description: 'This is a sample product.',
-          price: 99.99,
-          image: 'https://via.placeholder.com/150',
-        })}>
-          Add Sample Product to Wishlist
-        </button>
-      </div>
-    </div>
+    </Container>
   );
 };
 

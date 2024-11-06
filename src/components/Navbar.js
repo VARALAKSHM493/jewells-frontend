@@ -86,7 +86,7 @@ const CustomNavbar = () => {
                             </>
                         )}
                     </NavDropdown>
-                    <Nav.Link as={Link} to="/wishlist">
+                    <Nav.Link as={Link} to="/Wishlist">
                         <FaHeart /> Wishlist
                     </Nav.Link>
                     <Nav.Link as={Link} to="/cart">
