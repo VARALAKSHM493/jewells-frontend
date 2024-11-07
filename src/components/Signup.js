@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import '../styles/Signup.css'
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
@@ -144,7 +145,7 @@ const SignUp = () => {
                         </div>
                         <button type="submit" style={{ backgroundColor: 'green' }}>
                             Verify OTP
-                        </button>
+                        </button>g
                     </form>
                 </div>
             )}
